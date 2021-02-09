@@ -1,0 +1,10 @@
+---
+- hosts: nxos
+  tasks:
+  - name: Change Interface Desc and MTU
+    nxos_interface:
+     name: "{{ interface }}"
+     description: "{{ int_desc }}"
+     mtu: "{{ int_mtu }}"
+     admin_state: up
+

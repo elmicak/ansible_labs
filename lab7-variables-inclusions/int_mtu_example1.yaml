@@ -1,0 +1,18 @@
+---
+- hosts: nxos
+  tasks:
+  - name: Get config for Cisco Routers
+    nxos_facts:
+      gather_subset: interfaces
+
+  - name: Change Interface Desc and MTU
+    nxos_interface:
+      name: "{{ interface }}"
+      description: "{{ int_desc }}"
+      mtu: "{{ int_mtu }}"
+      admin_state: up
+
+  - name: TEST
+    debug:
+      var: ansible_net_interfaces['Ethernet1/2']['mtu']
+

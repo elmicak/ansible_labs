@@ -1,0 +1,16 @@
+n9k-standalone-03.localdomain ansible_ssh_host=192.168.32.4 ansible_ssh_user=admin ansible_ssh_pass=Cisco123
+
+[server]
+localhost
+
+[eos]
+veos-pod-04.localdomain
+
+[nxos]
+n9k-standalone-03.localdomain
+
+[router]
+csr1000v-pod-04.localdomain
+
+[junos]
+vsrx-pod-04.localdomain
