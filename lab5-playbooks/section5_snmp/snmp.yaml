@@ -1,0 +1,31 @@
+---
+
+- name: Change Ethernet Description and Assert
+  hosts: nxos
+  connection: httpapi
+  gather_facts: yes
+  vars:
+    ansible_network_os: nxos
+
+  tasks:
+    - name: Change Eth1/1 port desc
+      nxos_interface:
+        name: Ethernet1/1
+        description: 'uplink to core 04'
+    - nxos_facts:
+    - name: Debuging description
+      debug: var=ansible_net_interfaces['Ethernet1/1']['description']
+    - name: Verify change was made
+      assert: { that: "ansible_net_interfaces['Ethernet1/1']['description'] == 'uplink to core 04'" }
+
+    - name: SNMP
+      nxos_snmp_community: 
+        community: "{{ snmp_community }}"
+        group: "{{ snmp_group }}"
+        state: present
+
+    - nxos_facts:
+    - name: Check if snmp configured
+      debug: var=ansible_net_config
+#      assert: {that: "nxos_snmp_community.community == 'ansibleiscool'"}
+#      assert: {that: }

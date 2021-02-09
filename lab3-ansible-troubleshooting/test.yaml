@@ -1,0 +1,13 @@
+---
+
+- name: vlan provisioning
+  hosts: nxos
+  connection: local
+  gather_facts: no
+
+  tasks:
+
+    - name: ENSURE VLAN EXISTS. CREATE USING RANGE
+      nxos_vlan: 
+        vlan_range: 10-13 
+        state: present 

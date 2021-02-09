@@ -8,4 +8,15 @@
 
   tasks:
     - nxos_facts:
+    - name: Check if vlan2004 exist
+      debug: var=ansible_facts.vlan_list
+    - name: Create Vlan 2004
+      nxos_vlan:
+        vlan_id: 2004
+        admin_state: "up"
+        name: "test_2004"
+        state: "present"
+    - nxos_facts:
+    - name: Verify vlan created
+      debug: var=ansible_facts.vlan_list
 

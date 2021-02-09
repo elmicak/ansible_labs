@@ -1,0 +1,16 @@
+---
+- name: Set the motd banner
+  hosts: ios
+  gather_facts: yes
+
+  tasks:
+    - name: Configure motd 
+      ios_banner:
+        banner: motd
+        text: "this is test 04 motd"
+        state: present
+      register: conf_result
+
+    - name: check
+      debug: var=conf_result
+
